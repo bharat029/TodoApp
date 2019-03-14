@@ -1,0 +1,28 @@
+{% extends 'user/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign In{% endblock%}
+
+{% block body %}
+<div class="row">
+  <h1>Sigh In</h1>
+</div>
+<div class="row">
+  <div class="col-md-7">
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <legend class="border-bottom md-4">Welcome Back</legend>
+        {{ form|crispy }}
+        <span class="offset-sm-2 col-sm-10">
+          <button type="submit" class="btn btn-success">Sign In</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <small>Don't have an account? <a href="{% url 'user:registration' %}">Click here</a> to Create new Account</small>
+</div>
+{% endblock %}

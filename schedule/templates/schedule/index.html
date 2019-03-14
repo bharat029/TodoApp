@@ -1,0 +1,36 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Home{% endblock%}
+
+{% block body %}
+  {% if all_schedules %}
+    <h3>All Your Schedules</h3>
+    <br><br>
+    <dl class="offst-1 border-bottom">
+      {% for schedule in all_schedules %}
+      <div class="row border-top">
+        <div class="col-8">
+          <dt>{{ schedule.title }}:</dt>
+          <dd class="offset-1">
+            <p>{{ schedule.description }}</p>
+            <small>{{ schedule.deadline }}</small>
+          </dd>
+        </div>
+        <div class="col-1">
+          <a href="{% url 'schedule:update' schedule.pk %}" class="btn btn-primary">Update</a>
+        </div>
+        <form action="{% url 'schedule:delete' schedule.pk %}" class="col-1" method="post" style="display:inline">
+          {% csrf_token %}
+          <input type="hidden" name="schedule_id" value="{{ schedule.pd }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+      {% endfor %}
+    </dl>
+  {% else %}
+    <h3>No Schedules TO Show</h3>
+  {% endif %}
+  <div class="row">
+    <a href="{% url 'schedule:add' %}" class="btn btn-success">Add New Schedule Item</a>
+  </div>
+{% endblock %}
