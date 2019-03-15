@@ -1,6 +1,5 @@
 from django.utils import timezone
 from .models import Schedule
-from django.core.mail import send_mail
 import django_cron 
 
 class SendEmail(django_cron.CronJobBase):
